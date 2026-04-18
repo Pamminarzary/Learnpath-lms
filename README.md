@@ -5,13 +5,13 @@
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Netlify](https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://online-learnpath-lms.vercel.app)
 
 ---
 
 ## 🌐 Live Demo
 
-> 🔗 [**View Live Site**](https://your-site.netlify.app) ← *(replace with your deployed URL)*
+> 🔗 [**View Live Site**](https://onlinelearnpath-lms.vercel.app/)
 
 ---
 
@@ -74,19 +74,6 @@ No install needed. Just open `landing.html` in any browser.
 ---
 
 ## ☁️ Deployment
-
-### Deploy to Netlify (Recommended — Free)
-
-1. Go to [netlify.com](https://netlify.com) and sign up
-2. Drag and drop the project folder onto the Netlify dashboard
-3. Your site is live in under a minute ✅
-
-### Deploy to GitHub Pages
-
-1. Push this repo to GitHub
-2. Go to **Settings → Pages**
-3. Set Source to: `main` branch → `/ (root)`
-4. Your site will be live at `https://your-username.github.io/learnpath-lms`
 
 ### Deploy to Vercel
 
