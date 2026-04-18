@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account | LearnPath LMS</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      20%,60% { transform: translateX(-8px); }
+      40%,80% { transform: translateX(8px); }
+    }
+  </style>
+</head>
+<body>
+
+<header class="navbar">
+  <a href="landing.html" class="nav-left">
+    <img src="assets/images/logo.png" alt="LMS Logo" class="nav-logo">
+    <span class="nav-title">LearnPath</span>
+  </a>
+  <nav class="nav-links">
+    <a href="landing.html">Home</a>
+    <a href="dashboard.html">Courses</a>
+  </nav>
+  <div class="nav-actions">
+    <button onclick="toggleTheme()" class="theme-toggle" title="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<div class="auth-page">
+  <div class="auth-card" id="authCard">
+    <img src="assets/images/logo.png" class="auth-logo" alt="LMS Logo">
+    <h2>Create Account</h2>
+    <p class="auth-sub">Join thousands of students preparing for placements.</p>
+
+    <div class="auth-error" id="authError"></div>
+
+    <div class="form-group">
+      <label for="name">Full name</label>
+      <input type="text" id="name" placeholder="Your full name" autocomplete="off">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="text" id="email" placeholder="you@example.com" autocomplete="off">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Min. 6 characters" autocomplete="off">
+    </div>
+
+    <button onclick="signup()" class="btn btn-primary auth-submit" id="signupBtn">Create Account</button>
+
+    <p class="auth-link">
+      Already have an account? <a href="signin.html">Sign in</a>
+    </p>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom" style="padding-top:0;border:none;justify-content:center;">
+    <span>© 2026 LearnPath | Built by Pammi Narzary</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+function showError(msg) {
+  var el = document.getElementById('authError');
+  el.textContent = msg;
+  el.classList.add('show');
+  var card = document.getElementById('authCard');
+  card.style.animation = 'none';
+  void card.offsetWidth;
+  card.style.animation = 'shake 0.4s ease';
+}
+
+function signup() {
+  document.getElementById('authError').classList.remove('show');
+
+  var name  = document.getElementById('name').value.trim();
+  var email = document.getElementById('email').value.trim();
+  var pass  = document.getElementById('password').value;
+  var btn   = document.getElementById('signupBtn');
+
+  if (!name) { showError('Please enter your full name.'); return; }
+  if (!email || email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+    showError('Please enter a valid email address.'); return;
+  }
+  if (pass.length < 6) {
+    showError('Password must be at least 6 characters.'); return;
+  }
+
+  var user = { name: name, email: email, password: pass };
+  localStorage.setItem('user', JSON.stringify(user));
+  localStorage.setItem('loggedIn', 'true');
+  localStorage.setItem('userName', name);
+
+  btn.textContent = '✓ Account created!';
+  btn.disabled = true;
+  btn.style.opacity = '0.75';
+  btn.style.background = '#059669';
+
+  setTimeout(function() { window.location.href = 'dashboard.html'; }, 700);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') signup();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LearnPath LMS | Placement-Ready Skills</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <a href="landing.html" class="nav-left">
+    <img src="assets/images/logo.png" alt="LMS Logo" class="nav-logo">
+    <span class="nav-title">LearnPath</span>
+  </a>
+
+  <nav class="nav-links">
+    <a href="landing.html">Home</a>
+    <a href="dashboard.html">Courses</a>
+    <a href="#features">Features</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="nav-actions">
+    <span class="user-greeting" id="nav-greeting" style="display:none"></span>
+    <a href="signin.html" class="btn btn-outline" id="nav-login">Login</a>
+    <a href="signup.html" class="btn btn-primary" id="nav-signup">Sign Up</a>
+    <button onclick="logout()" class="btn btn-ghost" id="nav-logout" style="display:none">Logout</button>
+    <button onclick="toggleTheme()" class="theme-toggle" title="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-blob"></div>
+  <span class="hero-badge">🎓 #1 Placement-Focused LMS</span>
+  <h1>Upgrade Your Skills<br>Land Your Dream Job</h1>
+  <p>Structured courses, hands-on projects, and placement-focused learning paths designed to make you industry-ready.</p>
+  <div class="hero-cta">
+    <a href="signup.html" class="btn btn-primary big">Start Learning Free</a>
+    <a href="dashboard.html" class="btn btn-outline big">Browse Courses</a>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<div class="stats-bar">
+  <div class="stat-item fade-up">
+    <div class="stat-number">13+</div>
+    <div class="stat-label">Expert Courses</div>
+  </div>
+  <div class="stat-item fade-up">
+    <div class="stat-number">2500+</div>
+    <div class="stat-label">Students Enrolled</div>
+  </div>
+  <div class="stat-item fade-up">
+    <div class="stat-number">95%</div>
+    <div class="stat-label">Placement Rate</div>
+  </div>
+  <div class="stat-item fade-up">
+    <div class="stat-number">100%</div>
+    <div class="stat-label">Free to Start</div>
+  </div>
+</div>
+
+<!-- ===== FEATURES ===== -->
+<section class="features-section" id="features">
+  <div class="section-header">
+    <span class="section-tag">Why LearnPath?</span>
+    <h2 class="section-title fade-up">Everything You Need to Get Placed</h2>
+    <p class="section-subtitle fade-up">A complete learning ecosystem built for students targeting tech placements.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card fade-up">
+      <span class="feature-icon">📚</span>
+      <h3>Centralized Learning</h3>
+      <p>Access all your courses, materials, and progress tracking from a single beautiful dashboard.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <span class="feature-icon">🚀</span>
+      <h3>Industry-Relevant Skills</h3>
+      <p>Learn Web Dev, Data Science, Cyber Security, AI, and the modern technologies companies hire for.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <span class="feature-icon">🧭</span>
+      <h3>Structured Paths</h3>
+      <p>Follow guided learning paths with clear milestones that take you from beginner to job-ready.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <span class="feature-icon">🎯</span>
+      <h3>Placement Focused</h3>
+      <p>Every course is designed specifically to help students crack interviews and land great offers.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <span class="feature-icon">👶</span>
+      <h3>Beginner Friendly</h3>
+      <p>Step-by-step explanations with real-world projects. No prior experience required to start.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <span class="feature-icon">📊</span>
+      <h3>Progress Tracking</h3>
+      <p>Clean UI with search, enrollment management, and course progress tracking built in.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <span class="feature-icon">🏆</span>
+      <h3>Certification</h3>
+      <p>Earn industry-recognized certificates upon completing your courses.</p>
+    </div>
+    <div class="feature-card fade-up">
+      <span class="feature-icon">🤝</span>
+      <h3>Community Support</h3>
+      <p>Connect with peers, ask questions, and get help from our active community of learners and mentors.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="contact">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3>LearnPath</h3>
+      <p>Empowering students with placement-focused learning and industry-ready skills since 2026.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Courses</h4>
+      <ul>
+        <li><span>Web Development</span></li>
+        <li><span>Data Science</span></li>
+        <li><span>Machine Learning</span></li>
+        <li><span>Cyber Security</span></li>
+        <li><span>DevOps</span></li>
+        <li><span>Cloud Computing</span></li>
+        <li><span>Blockchain</span></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="landing.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="signin.html">Login</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Email: support@learnpath.com</p>
+      <p style="margin-top:8px">Phone: +91 XXXXX XXXXX</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 LearnPath | Built by Pammi Narzary</span>
+    <span>Made with ❤️ for placement-ready learners</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

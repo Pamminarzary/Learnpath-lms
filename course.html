@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course | LearnPath LMS</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <a href="landing.html" class="nav-left">
+    <img src="assets/images/logo.png" alt="LMS Logo" class="nav-logo">
+    <span class="nav-title">LearnPath</span>
+  </a>
+
+  <nav class="nav-links">
+    <a href="landing.html">Home</a>
+    <a href="dashboard.html">Courses</a>
+  </nav>
+
+  <div class="nav-actions">
+    <span class="user-greeting" id="nav-greeting" style="display:none"></span>
+    <a href="signin.html" class="btn btn-outline" id="nav-login">Login</a>
+    <a href="signup.html" class="btn btn-primary" id="nav-signup">Sign Up</a>
+    <button onclick="logout()" class="btn btn-ghost" id="nav-logout" style="display:none">Logout</button>
+    <button onclick="toggleTheme()" class="theme-toggle" title="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<!-- ===== COURSE HERO ===== -->
+<div class="course-hero">
+  <a href="dashboard.html" class="back-link">← Back to Courses</a>
+  <div style="max-width:1100px; margin:0 auto;">
+    <div id="course-tag" style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--primary);margin-bottom:10px;"></div>
+    <h1 id="courseTitle" style="font-family:'Sora',sans-serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:14px;">Loading...</h1>
+    <p id="courseDesc" style="font-size:1rem;color:var(--text-muted);max-width:650px;line-height:1.75;"></p>
+  </div>
+</div>
+
+<!-- ===== COURSE LAYOUT ===== -->
+<div class="course-layout">
+
+  <!-- Main Content -->
+  <div class="course-main">
+    <h2 class="course-section-label">What You Will Learn</h2>
+    <ul class="learn-list" id="coursePoints"></ul>
+
+    <h2 class="course-section-label">Course Modules</h2>
+    <ul class="modules-list" id="courseModules"></ul>
+
+    <div id="prereqSection" style="margin-top:36px;">
+      <h2 class="course-section-label">Prerequisites</h2>
+      <p id="prereqText" style="font-size:0.92rem;color:var(--text-muted);line-height:1.7;"></p>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="course-sidebar">
+    <div class="course-card-box">
+      <img id="courseThumb" class="course-thumb" src="" alt="Course">
+
+      <ul class="course-meta">
+        <li>
+          <span class="meta-label">Level</span>
+          <span class="meta-value" id="meta-level">—</span>
+        </li>
+        <li>
+          <span class="meta-label">Duration</span>
+          <span class="meta-value" id="meta-duration">—</span>
+        </li>
+        <li>
+          <span class="meta-label">Modules</span>
+          <span class="meta-value" id="meta-modules">—</span>
+        </li>
+        <li>
+          <span class="meta-label">Price</span>
+          <span class="meta-value" style="color:var(--primary);font-weight:800;">Free</span>
+        </li>
+      </ul>
+
+      <div class="enrolled-badge" id="enrolledBadge">
+        ✅ You're enrolled!
+      </div>
+      <button class="btn btn-primary enroll-btn" id="enrollBtn" onclick="enrollCourse()">Enroll Now — It's Free</button>
+    </div>
+  </aside>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="contact">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3>LearnPath</h3>
+      <p>Empowering students with placement-focused learning and industry-ready skills since 2026.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="landing.html">Home</a></li>
+        <li><a href="dashboard.html">All Courses</a></li>
+        <li><a href="signin.html">Login</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Email: support@learnpath.com</p>
+      <p style="margin-top:8px">Phone: +91 XXXXX XXXXX</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 LearnPath | Built by Pammi Narzary</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// ===== COURSE DATA =====
+const courses = {
+  web: {
+    title: "Web Development",
+    tag: "Frontend · Backend · Full Stack",
+    desc: "Learn to build modern, responsive, production-grade websites from scratch using HTML, CSS, JavaScript, and popular frameworks. This course is designed to take you from zero to job-ready.",
+    img: "assets/images/web-dev.png",
+    level: "🟢 Beginner",
+    duration: "8 weeks",
+    points: [
+      "Build semantic, accessible HTML5 pages",
+      "Style with CSS3, Flexbox & Grid",
+      "Write interactive JavaScript (ES6+)",
+      "Create responsive, mobile-first layouts",
+      "Understand React fundamentals",
+      "Deploy websites using Netlify / Vercel"
+    ],
+    modules: [
+      "HTML5 Foundations",
+      "CSS3 & Responsive Design",
+      "JavaScript Core Concepts",
+      "DOM Manipulation & Events",
+      "React Introduction",
+      "REST APIs & Fetch",
+      "Project: Portfolio Website",
+      "Deployment & Hosting"
+    ],
+    prereqs: "No prior experience needed. Basic computer skills are sufficient."
+  },
+  data: {
+    title: "Data Science",
+    tag: "Python · Analytics · Visualization",
+    desc: "Master Python, data analysis, and ML fundamentals with real-world projects designed to prepare you for data science roles. Learn how to extract insights from data that drive business decisions.",
+    img: "assets/images/ds.png",
+    level: "🟡 Intermediate",
+    duration: "10 weeks",
+    points: [
+      "Python for data manipulation with Pandas & NumPy",
+      "Exploratory Data Analysis (EDA)",
+      "Data visualization with Matplotlib & Seaborn",
+      "Statistical analysis and hypothesis testing",
+      "Build and evaluate ML models",
+      "Work with real datasets and case studies"
+    ],
+    modules: [
+      "Python Refresh",
+      "NumPy & Pandas Deep Dive",
+      "Data Cleaning & Wrangling",
+      "Exploratory Data Analysis",
+      "Data Visualization",
+      "Statistics for Data Science",
+      "Intro to Machine Learning",
+      "Project: End-to-End EDA",
+      "Interview Preparation",
+      "Capstone Project"
+    ],
+    prereqs: "Basic Python knowledge recommended. Familiarity with algebra and basic statistics is helpful."
+  },
+  app: {
+    title: "App Development",
+    tag: "Flutter · Android · Mobile",
+    desc: "Build modern, cross-platform mobile applications using Flutter and Android SDK fundamentals. Learn to design beautiful UIs, handle state, and publish apps to the Play Store.",
+    img: "assets/images/app.png",
+    level: "🟡 Intermediate",
+    duration: "9 weeks",
+    points: [
+      "Dart programming language fundamentals",
+      "Flutter widgets and UI composition",
+      "State management (Provider / Riverpod)",
+      "Navigation and routing in Flutter",
+      "Connecting to REST APIs",
+      "Android fundamentals with Java/Kotlin",
+      "Publishing to Google Play Store"
+    ],
+    modules: [
+      "Dart Fundamentals",
+      "Flutter Basics & Widgets",
+      "Layouts & Theming",
+      "State Management",
+      "Navigation & Routing",
+      "REST APIs in Flutter",
+      "Local Storage & SQLite",
+      "Publishing Your App",
+      "Capstone App Project"
+    ],
+    prereqs: "Basic programming knowledge helpful. OOP concepts recommended."
+  },
+  ml: {
+    title: "Machine Learning",
+    tag: "Python · Scikit-learn · ML Models",
+    desc: "Learn machine learning fundamentals and build intelligent, data-driven models from scratch. Understand the math behind popular algorithms and apply them to real-world placement problems.",
+    img: "assets/images/machine-learning.png",
+    level: "🟡 Intermediate",
+    duration: "12 weeks",
+    points: [
+      "Supervised and unsupervised learning",
+      "Linear & logistic regression",
+      "Decision trees, random forests, SVMs",
+      "Model evaluation and cross-validation",
+      "Feature engineering techniques",
+      "Neural network introduction",
+      "Building ML pipelines with scikit-learn"
+    ],
+    modules: [
+      "ML Foundations & Math Review",
+      "Regression Algorithms",
+      "Classification Algorithms",
+      "Model Evaluation Metrics",
+      "Unsupervised Learning",
+      "Ensemble Methods",
+      "Feature Engineering",
+      "Intro to Neural Networks",
+      "ML Project Pipeline",
+      "Interview Q&A",
+      "Capstone ML Project",
+      "Deployment Basics"
+    ],
+    prereqs: "Python proficiency required. Data Science course or equivalent knowledge recommended."
+  },
+  cyber: {
+    title: "Cyber Security",
+    tag: "Security · Ethical Hacking · Networking",
+    desc: "Understand cybersecurity fundamentals, tools, and ethical hacking basics. Learn how to identify vulnerabilities, secure systems, and think like an attacker to defend better.",
+    img: "assets/images/security.png",
+    level: "🔴 Advanced",
+    duration: "10 weeks",
+    points: [
+      "Networking fundamentals for security",
+      "Threat modeling and risk analysis",
+      "Linux security fundamentals",
+      "Ethical hacking methodology",
+      "Web application security (OWASP Top 10)",
+      "Cryptography basics",
+      "Security tools: Nmap, Wireshark, Burp Suite"
+    ],
+    modules: [
+      "Security Fundamentals",
+      "Networking for Security",
+      "Linux & Command Line",
+      "Ethical Hacking Intro",
+      "Reconnaissance & Footprinting",
+      "Web Application Security",
+      "Cryptography",
+      "Incident Response",
+      "Security Tools Lab",
+      "Capture The Flag (CTF)"
+    ],
+    prereqs: "Basic networking and Linux knowledge. Computer Networks course recommended."
+  },
+  ai: {
+    title: "Artificial Intelligence",
+    tag: "AI · Deep Learning · NLP",
+    desc: "Understand AI concepts, neural networks, deep learning, and natural language processing. Build smart applications using real data and modern AI frameworks like TensorFlow and PyTorch.",
+    img: "assets/images/ai.png",
+    level: "🔴 Advanced",
+    duration: "14 weeks",
+    points: [
+      "AI history and core concepts",
+      "Deep neural networks from scratch",
+      "Convolutional Neural Networks (CNNs) for vision",
+      "Recurrent Neural Networks (RNNs) for sequences",
+      "Natural Language Processing (NLP) basics",
+      "Transfer learning with pretrained models",
+      "Build and deploy AI applications"
+    ],
+    modules: [
+      "AI Foundations",
+      "Math for AI (Linear Algebra, Calculus)",
+      "Neural Networks from Scratch",
+      "TensorFlow / PyTorch Basics",
+      "CNNs & Computer Vision",
+      "RNNs & Sequence Models",
+      "NLP Fundamentals",
+      "Transformers & BERT",
+      "AI Ethics",
+      "Capstone AI Project",
+      "Deployment with Flask/FastAPI"
+    ],
+    prereqs: "Machine Learning course required. Strong Python skills and math background needed."
+  },
+  devops: {
+    title: "DevOps",
+    tag: "Docker · CI/CD · Kubernetes · Git",
+    desc: "Learn DevOps practices to automate, build, test, and deploy applications efficiently. Understand the tools and culture behind continuous integration, continuous delivery, and cloud-native operations.",
+    img: "assets/images/dev.png",
+    level: "🟡 Intermediate",
+    duration: "8 weeks",
+    points: [
+      "Git & GitHub for collaborative development",
+      "Linux administration basics",
+      "Docker containers and Docker Compose",
+      "CI/CD pipelines with GitHub Actions",
+      "Kubernetes fundamentals",
+      "Infrastructure as Code with Terraform",
+      "Monitoring with Prometheus & Grafana"
+    ],
+    modules: [
+      "DevOps Culture & Fundamentals",
+      "Git & GitHub Mastery",
+      "Linux & Bash Scripting",
+      "Docker & Containerization",
+      "CI/CD with GitHub Actions",
+      "Kubernetes Basics",
+      "Infrastructure as Code",
+      "Monitoring & Alerting"
+    ],
+    prereqs: "Basic Linux knowledge and some programming experience recommended."
+  },
+  cloud: {
+    title: "Cloud Computing",
+    tag: "AWS · GCP · Azure · Serverless",
+    desc: "Learn cloud fundamentals and deploy scalable, fault-tolerant applications using modern cloud platforms. Understand the economics and architecture of cloud-native systems.",
+    img: "assets/images/cloud.png",
+    level: "🟡 Intermediate",
+    duration: "8 weeks",
+    points: [
+      "Cloud computing models: IaaS, PaaS, SaaS",
+      "AWS core services: EC2, S3, RDS, Lambda",
+      "VPCs, security groups, and IAM",
+      "Serverless architecture patterns",
+      "Auto-scaling and load balancing",
+      "Cost optimization strategies",
+      "Cloud certifications preparation (AWS CLF)"
+    ],
+    modules: [
+      "Cloud Fundamentals",
+      "AWS Core Services",
+      "Networking in the Cloud",
+      "Security & IAM",
+      "Serverless with Lambda",
+      "Databases on AWS",
+      "Cost Management",
+      "Capstone: Deploy a Full-Stack App"
+    ],
+    prereqs: "Basic networking knowledge helpful. No cloud experience required."
+  },
+  dsa: {
+    title: "Data Structures & Algorithms",
+    tag: "Algorithms · Problem Solving · Interviews",
+    desc: "Master problem-solving skills and crack coding interviews at top tech companies. Build intuition for time/space complexity and learn how to approach any coding problem systematically.",
+    img: "assets/images/dsa.png",
+    level: "🟢 All Levels",
+    duration: "16 weeks",
+    points: [
+      "Arrays, strings, and sliding window",
+      "Stacks, queues, and linked lists",
+      "Trees, BSTs, and graph traversal",
+      "Recursion and dynamic programming",
+      "Sorting and searching algorithms",
+      "Greedy algorithms and backtracking",
+      "Time and space complexity analysis"
+    ],
+    modules: [
+      "Big-O Notation & Complexity",
+      "Arrays & Strings",
+      "Linked Lists",
+      "Stacks & Queues",
+      "Recursion & Backtracking",
+      "Trees & Binary Trees",
+      "Graphs & BFS/DFS",
+      "Dynamic Programming",
+      "Sorting Algorithms",
+      "Greedy Algorithms",
+      "Heaps & Priority Queues",
+      "Mock Interviews & Problem Sets"
+    ],
+    prereqs: "Basic programming in any language (Python, Java, or C++ preferred)."
+  },
+  dbms: {
+    title: "Database Management Systems",
+    tag: "SQL · Database Design · NoSQL",
+    desc: "Learn database design, SQL queries, normalization, and data management fundamentals. Understand both relational and NoSQL databases used across the industry.",
+    img: "assets/images/dbms.png",
+    level: "🟢 Beginner",
+    duration: "6 weeks",
+    points: [
+      "Relational database concepts and ER modeling",
+      "SQL: SELECT, JOINs, GROUP BY, subqueries",
+      "Normalization (1NF, 2NF, 3NF, BCNF)",
+      "Transactions, ACID properties",
+      "Indexing and query optimization",
+      "Introduction to NoSQL (MongoDB)",
+      "Database design for real applications"
+    ],
+    modules: [
+      "Database Fundamentals",
+      "ER Diagrams & Modeling",
+      "SQL Basics",
+      "Advanced SQL & JOINs",
+      "Normalization",
+      "Transactions & Concurrency",
+      "Indexing & Optimization",
+      "Intro to MongoDB"
+    ],
+    prereqs: "No prior database experience needed. Basic logical thinking is sufficient."
+  },
+  os: {
+    title: "Operating Systems",
+    tag: "Systems · Processes · Memory",
+    desc: "Understand how modern operating systems work under the hood. Learn process management, memory management, scheduling algorithms, and file systems—all critical knowledge for placements.",
+    img: "assets/images/os.png",
+    level: "🟡 Intermediate",
+    duration: "7 weeks",
+    points: [
+      "Process creation, scheduling, and synchronization",
+      "Deadlock detection and prevention",
+      "Memory management and virtual memory",
+      "Page replacement algorithms",
+      "File systems and storage management",
+      "I/O management and interrupts",
+      "OS interview question patterns"
+    ],
+    modules: [
+      "OS Fundamentals",
+      "Process & Threads",
+      "CPU Scheduling",
+      "Process Synchronization",
+      "Deadlocks",
+      "Memory Management",
+      "Virtual Memory",
+      "File Systems"
+    ],
+    prereqs: "Basic C programming knowledge helpful. Computer architecture fundamentals recommended."
+  },
+  cn: {
+    title: "Computer Networks",
+    tag: "TCP/IP · Protocols · Networking",
+    desc: "Learn networking concepts, protocols, and how data flows across the internet and local area networks. Essential knowledge for placements in backend, cloud, security, and DevOps roles.",
+    img: "assets/images/cn.png",
+    level: "🟡 Intermediate",
+    duration: "7 weeks",
+    points: [
+      "OSI and TCP/IP model layers",
+      "IP addressing, subnetting, and CIDR",
+      "DNS, DHCP, HTTP/HTTPS protocols",
+      "TCP vs UDP and flow control",
+      "Routing algorithms and BGP/OSPF",
+      "Network security basics",
+      "Wireshark lab for packet analysis"
+    ],
+    modules: [
+      "Networking Fundamentals",
+      "Physical & Data Link Layer",
+      "Network Layer & IP",
+      "Transport Layer: TCP & UDP",
+      "Application Layer Protocols",
+      "Routing & Switching",
+      "Network Security",
+      "Lab: Packet Analysis"
+    ],
+    prereqs: "No prior networking knowledge required. Logical thinking and curiosity are enough."
+  },
+  blockchain: {
+    title: "Blockchain",
+    tag: "Web3 · Smart Contracts · DeFi",
+    desc: "Understand decentralized systems, blockchain architecture, and smart contracts. Build secure blockchain applications and explore the emerging world of Web3 and decentralized finance.",
+    img: "assets/images/block.png",
+    level: "🔴 Advanced",
+    duration: "8 weeks",
+    points: [
+      "Blockchain fundamentals and consensus mechanisms",
+      "Bitcoin and Ethereum architecture",
+      "Solidity smart contract programming",
+      "Decentralized applications (dApps)",
+      "DeFi protocols and tokenomics",
+      "NFT standards (ERC-20, ERC-721)",
+      "Security in blockchain systems"
+    ],
+    modules: [
+      "Blockchain Fundamentals",
+      "Bitcoin Internals",
+      "Ethereum & EVM",
+      "Solidity Programming",
+      "Smart Contract Development",
+      "Hardhat & Testing",
+      "DeFi & Protocols",
+      "Building a dApp"
+    ],
+    prereqs: "Basic JavaScript knowledge required. Some cryptography understanding helpful."
+  }
+};
+
+// ===== LOAD COURSE FROM URL PARAM =====
+const params = new URLSearchParams(window.location.search);
+const courseKey = params.get('course');
+const course = courses[courseKey];
+
+if (course) {
+  document.title = course.title + ' | LearnPath LMS';
+  document.getElementById('courseTitle').textContent = course.title;
+  document.getElementById('course-tag').textContent = course.tag;
+  document.getElementById('courseDesc').textContent = course.desc;
+  document.getElementById('courseThumb').src = course.img;
+  document.getElementById('courseThumb').alt = course.title;
+  document.getElementById('meta-level').textContent = course.level;
+  document.getElementById('meta-duration').textContent = course.duration;
+  document.getElementById('meta-modules').textContent = course.modules.length;
+  document.getElementById('prereqText').textContent = course.prereqs;
+
+  // Learning points
+  const ul = document.getElementById('coursePoints');
+  course.points.forEach(p => {
+    const li = document.createElement('li');
+    li.textContent = p;
+    ul.appendChild(li);
+  });
+
+  // Modules
+  const ml = document.getElementById('courseModules');
+  course.modules.forEach((m, i) => {
+    const li = document.createElement('li');
+    li.className = 'module-item';
+    li.innerHTML = `<div class="module-num">${String(i+1).padStart(2,'0')}</div><span>${m}</span>`;
+    ml.appendChild(li);
+  });
+
+  // Check enrollment
+  checkEnrollmentStatus();
+} else {
+  // Course not found
+  document.getElementById('courseTitle').textContent = 'Course Not Found';
+  document.getElementById('courseDesc').textContent = 'The requested course could not be found. Please go back and select a valid course.';
+}
+
+function checkEnrollmentStatus() {
+  const enrolled = JSON.parse(localStorage.getItem('enrolledCourses') || '[]');
+  const enrollBtn = document.getElementById('enrollBtn');
+  const badge = document.getElementById('enrolledBadge');
+
+  if (enrolled.includes(courseKey)) {
+    enrollBtn.style.display = 'none';
+    badge.style.display = 'flex';
+  } else {
+    enrollBtn.style.display = 'block';
+    badge.style.display = 'none';
+  }
+}
+
+function enrollCourse() {
+  const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
+  if (!isLoggedIn) {
+    showToast('Please sign in to enroll in courses.', 'error');
+    setTimeout(() => window.location.href = 'signin.html', 1200);
+    return;
+  }
+
+  let enrolled = JSON.parse(localStorage.getItem('enrolledCourses') || '[]');
+  if (!enrolled.includes(courseKey)) {
+    enrolled.push(courseKey);
+    localStorage.setItem('enrolledCourses', JSON.stringify(enrolled));
+    showToast('🎉 Successfully enrolled in ' + course.title + '!', 'success');
+    checkEnrollmentStatus();
+  }
+}
+</script>
+</body>
+</html>

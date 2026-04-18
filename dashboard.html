@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses | LearnPath LMS</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar">
+  <a href="landing.html" class="nav-left">
+    <img src="assets/images/logo.png" alt="LMS Logo" class="nav-logo">
+    <span class="nav-title">LearnPath</span>
+  </a>
+
+  <nav class="nav-links">
+    <a href="landing.html">Home</a>
+    <a href="dashboard.html">Courses</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <div class="nav-actions">
+    <span class="user-greeting" id="nav-greeting" style="display:none"></span>
+    <a href="signin.html" class="btn btn-outline" id="nav-login">Login</a>
+    <a href="signup.html" class="btn btn-primary" id="nav-signup">Sign Up</a>
+    <button onclick="logout()" class="btn btn-ghost" id="nav-logout" style="display:none">Logout</button>
+    <button onclick="toggleTheme()" class="theme-toggle" title="Toggle theme">🌙</button>
+  </div>
+</header>
+
+<!-- ===== PAGE HEADER ===== -->
+<div class="page-header">
+  <h1>Explore Courses</h1>
+  <p>Placement-focused courses to accelerate your tech career.</p>
+</div>
+
+<!-- ===== SEARCH ===== -->
+<div class="search-container">
+  <div class="search-wrapper">
+    <span class="search-icon">🔍</span>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search courses (e.g. Machine Learning, DevOps...)"
+      oninput="searchCourses()"
+    >
+  </div>
+</div>
+
+<!-- ===== COURSES GRID ===== -->
+<div class="courses-grid" id="coursesGrid">
+
+  <a class="course-card" href="course.html?course=web" data-title="web development">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/web-dev.png" alt="Web Development">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">Frontend · Backend</div>
+      <h4>Web Development</h4>
+      <p>Build modern, responsive websites using HTML, CSS, JavaScript, and popular frameworks.</p>
+      <div class="course-card-footer">
+        <span class="level">🟢 Beginner</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=data" data-title="data science">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/ds.png" alt="Data Science">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">Python · Analytics</div>
+      <h4>Data Science</h4>
+      <p>Master Python, data analysis, and ML fundamentals with placement-focused real-world projects.</p>
+      <div class="course-card-footer">
+        <span class="level">🟡 Intermediate</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=app" data-title="app development">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/app.png" alt="App Development">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">Flutter · Android</div>
+      <h4>App Development</h4>
+      <p>Build modern mobile apps using Flutter and Android SDK fundamentals.</p>
+      <div class="course-card-footer">
+        <span class="level">🟡 Intermediate</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=ml" data-title="machine learning">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/machine-learning.png" alt="Machine Learning">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">Python · ML · AI</div>
+      <h4>Machine Learning</h4>
+      <p>Learn machine learning fundamentals and build intelligent, data-driven models from scratch.</p>
+      <div class="course-card-footer">
+        <span class="level">🟡 Intermediate</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=cyber" data-title="cyber security">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/security.png" alt="Cyber Security">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">Security · Networking</div>
+      <h4>Cyber Security</h4>
+      <p>Understand cybersecurity fundamentals, tools, threat analysis, and ethical hacking basics.</p>
+      <div class="course-card-footer">
+        <span class="level">🔴 Advanced</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=ai" data-title="artificial intelligence">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/ai.png" alt="Artificial Intelligence">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">AI · Deep Learning</div>
+      <h4>Artificial Intelligence</h4>
+      <p>Understand AI concepts, neural networks, and build smart applications using real data.</p>
+      <div class="course-card-footer">
+        <span class="level">🔴 Advanced</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=devops" data-title="devops">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/dev.png" alt="DevOps">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">Docker · CI/CD · Git</div>
+      <h4>DevOps</h4>
+      <p>Learn DevOps practices to automate, build, and deploy applications efficiently at scale.</p>
+      <div class="course-card-footer">
+        <span class="level">🟡 Intermediate</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=cloud" data-title="cloud computing">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/cloud.png" alt="Cloud Computing">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">AWS · GCP · Azure</div>
+      <h4>Cloud Computing</h4>
+      <p>Learn cloud fundamentals and deploy scalable applications using modern cloud platforms.</p>
+      <div class="course-card-footer">
+        <span class="level">🟡 Intermediate</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=dsa" data-title="data structures algorithms">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/dsa.png" alt="DSA">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">Algorithms · Problem Solving</div>
+      <h4>Data Structures & Algorithms</h4>
+      <p>Master problem-solving skills and crack coding interviews at top tech companies.</p>
+      <div class="course-card-footer">
+        <span class="level">🟢 All Levels</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=dbms" data-title="database management system">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/dbms.png" alt="DBMS">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">SQL · Database Design</div>
+      <h4>Database Management Systems</h4>
+      <p>Learn database design, SQL queries, normalization, and data management fundamentals.</p>
+      <div class="course-card-footer">
+        <span class="level">🟢 Beginner</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=os" data-title="operating systems">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/os.png" alt="Operating Systems">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">Systems · Processes</div>
+      <h4>Operating Systems</h4>
+      <p>Understand process management, memory, scheduling, and how modern operating systems work.</p>
+      <div class="course-card-footer">
+        <span class="level">🟡 Intermediate</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=cn" data-title="computer networks networking">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/cn.png" alt="Computer Networks">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">TCP/IP · Protocols</div>
+      <h4>Computer Networks</h4>
+      <p>Learn networking concepts, protocols, and how data flows across the internet and LANs.</p>
+      <div class="course-card-footer">
+        <span class="level">🟡 Intermediate</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="course-card" href="course.html?course=blockchain" data-title="blockchain web3">
+    <div class="course-card-img-wrap">
+      <img class="course-card-img" src="assets/images/block.png" alt="Blockchain">
+    </div>
+    <div class="course-card-body">
+      <div class="course-card-tag">Web3 · DeFi · Smart Contracts</div>
+      <h4>Blockchain</h4>
+      <p>Understand decentralized systems, smart contracts, and build secure blockchain applications.</p>
+      <div class="course-card-footer">
+        <span class="level">🔴 Advanced</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
+  </a>
+
+  <div class="no-results" id="noResults">
+    No courses found for "<span id="searchTerm"></span>". Try a different keyword.
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="contact">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3>LearnPath</h3>
+      <p>Empowering students with placement-focused learning and industry-ready skills since 2026.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Courses</h4>
+      <ul>
+        <li><span>Web Development</span></li>
+        <li><span>Data Science</span></li>
+        <li><span>Machine Learning</span></li>
+        <li><span>Cyber Security</span></li>
+        <li><span>DevOps</span></li>
+        <li><span>Cloud Computing</span></li>
+        <li><span>Blockchain</span></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="landing.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="signin.html">Login</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>Email: support@learnpath.com</p>
+      <p style="margin-top:8px">Phone: +91 XXXXX XXXXX</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 LearnPath | Built by Pammi Narzary</span>
+    <span>Made with ❤️ for placement-ready learners</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+function searchCourses() {
+  const input = document.getElementById('searchInput').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.course-card');
+  const noResults = document.getElementById('noResults');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const title = card.getAttribute('data-title') || '';
+    const text = card.innerText.toLowerCase();
+    const match = title.includes(input) || text.includes(input);
+    card.style.display = match ? 'flex' : 'none';
+    if (match) visible++;
+  });
+
+  if (visible === 0 && input !== '') {
+    noResults.style.display = 'block';
+    document.getElementById('searchTerm').textContent = input;
+  } else {
+    noResults.style.display = 'none';
+  }
+}
+</script>
+</body>
+</html>
