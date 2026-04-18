@@ -19,7 +19,7 @@
 
 | Landing Page | Course Dashboard | Course Detail |
 |---|---|---|
-| *(add screenshot)* | *(add screenshot)* | *(add screenshot)* |
+| *(https://github.com/Pamminarzary/Learnpath-lms/blob/main/home.png)* | *()* | *(add screenshot)* |
 
 ---
 
